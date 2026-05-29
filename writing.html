@@ -97,6 +97,16 @@
       background: #3D6147;
     }
 
+    .nav-toggle { display: none; }
+    .menu-btn {
+      display: none;
+      font-size: 1.6rem;
+      line-height: 1;
+      color: #2C4A35;
+      cursor: pointer;
+      user-select: none;
+    }
+
     /* PAGE HEADER */
     .page-header {
       padding: 120px 2rem 4rem;
@@ -289,6 +299,7 @@
 
     .f-links {
       display: flex;
+      flex-wrap: wrap;
       gap: 1.5rem;
       list-style: none;
     }
@@ -307,7 +318,17 @@
     }
 
   @media(max-width:800px) {
-    .nav-links { display:none; }
+    html, body { overflow-x: hidden; }
+    .menu-btn { display: block; }
+    .nav-links {
+      display: none; position: absolute; top: 60px; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 0;
+      background: rgba(250,250,247,0.98); border-bottom: 1px solid #E5E0D5; padding: 0.4rem 0;
+    }
+    .nav-toggle:checked ~ .nav-links { display: flex; }
+    .nav-links li { width: 100%; }
+    .nav-links a, .nav-links a.btn { display: block; padding: 0.85rem 2rem; background: none; color: #444; }
+    .nav-links a.btn { color: #2C4A35; font-weight: 500; }
 
     .writing-art.left,
     .writing-art.right {
@@ -335,6 +356,8 @@
 
   <nav>
     <a href="index.html" class="logo">Raising<span>4Rosie</span></a>
+    <input type="checkbox" id="navToggle" class="nav-toggle">
+    <label for="navToggle" class="menu-btn" aria-label="Open menu">&#9776;</label>
     <ul class="nav-links">
       <li><a href="index.html#about">About</a></li>
       <li><a href="index.html#race">The Race</a></li>
