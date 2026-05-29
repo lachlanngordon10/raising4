@@ -603,6 +603,16 @@
     </ul>
   </footer>
 
+  <script>
+    /* close the mobile menu whenever a nav link is tapped */
+    document.querySelectorAll('.nav-links a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        var t = document.getElementById('navToggle');
+        if (t) t.checked = false;
+      });
+    });
+  </script>
+
 </body>
 
 </html>
