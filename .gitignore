@@ -1,0 +1,12 @@
+# High-res originals — kept locally as masters, not published
+images/
+drawings_no_background/
+originals/
+
+# Local editor / tooling config
+.claude/
+
+# macOS / system junk
+.DS_Store
+*.icloud
+Thumbs.db

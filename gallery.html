@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery — Raising4Rosie</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; font-weight: 300; background: #FAFAF7; color: #222; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250, 250, 247, 0.97); border-bottom: 1px solid #E5E0D5;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 60px;
+    }
+    .logo {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.4rem;
+      color: #2C4A35; text-decoration: none; font-weight: 600;
+    }
+    .logo span { font-weight: 400; font-style: italic; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a {
+      font-size: 0.78rem; font-weight: 400; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #555; text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #2C4A35; }
+    .nav-links a.btn { background: #2C4A35; color: #fff; padding: 0.45rem 1.1rem; }
+    .nav-links a.btn:hover { background: #3D6147; }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 9rem 2rem 4rem; background: #fff;
+      border-bottom: 1px solid #E5E0D5; text-align: center;
+    }
+    .page-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 400; font-style: italic;
+      color: #2C4A35; line-height: 1.1; margin-bottom: 1rem;
+    }
+    .header-divider { width: 40px; height: 2px; background: #C4932A; margin: 1.5rem auto; }
+    .page-header p { font-size: 1rem; color: #666; font-weight: 300; max-width: 500px; margin: 0 auto; line-height: 1.7; }
+
+    /* MASONRY GALLERY */
+    .gallery {
+      max-width: 1120px; margin: 0 auto;
+      padding: 3.5rem 2rem 6rem;
+      column-count: 3; column-gap: 1rem;
+    }
+    .gallery img {
+      width: 100%; margin-bottom: 1rem; display: block;
+      break-inside: avoid;
+      cursor: zoom-in;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.09);
+      transition: opacity 0.2s;
+    }
+    .gallery img:hover { opacity: 0.9; }
+
+    @media(max-width: 900px) { .gallery { column-count: 2; } .nav-links { display: none; } }
+    @media(max-width: 560px) { .gallery { column-count: 1; } }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0, 0, 0, 0.9); z-index: 1000;
+      align-items: center; justify-content: center; cursor: zoom-out;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 92vh; object-fit: contain; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); }
+    .lightbox-close { position: absolute; top: 1.2rem; right: 1.8rem; color: #fff; font-size: 2.2rem; cursor: pointer; line-height: 1; opacity: 0.75; }
+    .lightbox-close:hover { opacity: 1; }
+
+    /* FOOTER */
+    footer {
+      background: #1A1A16; padding: 2.5rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1.5rem;
+    }
+    .f-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: #C0B898; }
+    .f-date { font-size: 0.72rem; letter-spacing: 0.12em; color: #555; margin-top: 0.3rem; }
+    .f-links { display: flex; gap: 1.5rem; list-style: none; }
+    .f-links a {
+      font-size: 0.72rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #555; text-decoration: none; transition: color 0.2s;
+    }
+    .f-links a:hover { color: #DDB84A; }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">Raising<span>4Rosie</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#race">The Race</a></li>
+      <li><a href="index.html#charities">Charities</a></li>
+      <li><a href="events.html">4Rosie</a></li>
+      <li><a href="writing.html">Her Writing</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="https://www.givewheel.com/fundraising/12992/raising-4-rosie/" target="_blank" class="btn">Donate</a></li>
+    </ul>
+  </nav>
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <h1>Gallery</h1>
+    <div class="header-divider"></div>
+    <p>A collection of moments — family, friends, travels and the natural world Rosie loved.</p>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="gallery">
+    <img src="gallery/g01.jpg" alt="Rosie as a child with her siblings by the pond" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g08.jpg" alt="Rosie with an elephant" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g13.jpg" alt="Rosie smiling in the grass" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g02.jpg" alt="Rosie with her family" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g09.jpg" alt="Rosie at sunset on the dunes" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g03.jpg" alt="Rosie riding as a child" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g12.jpg" alt="Rosie with friends" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g07.jpg" alt="Rosie with her horse" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g11.jpg" alt="Rosie by the sea at sunset" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g04.jpg" alt="Rosie and her siblings in a hollow tree" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g18.jpg" alt="Rosie" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g05.jpg" alt="Rosie and her siblings in the sea" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g14.jpg" alt="Rosie with her dad" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g10.jpg" alt="Rosie at the beach" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g06.jpg" alt="Rosie with her brother and sister at sunset" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g15.jpg" alt="Rosie with the dog" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g16.jpg" alt="Rosie" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g17.jpg" alt="Rosie" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g19.jpg" alt="Rosie sketching" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g26.jpg" alt="Rosie laughing" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g20.jpg" alt="Rosie swimming in the lake" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g23.jpg" alt="Rosie in the boat shed" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g27.jpg" alt="Rosie" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g21.jpg" alt="Rosie leading her horse" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g24.jpg" alt="Rosie laughing with a friend" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g22.jpg" alt="Rosie outdoors" loading="lazy" onclick="openLightbox(this)">
+    <img src="gallery/g25.jpg" alt="Rosie with her dad" loading="lazy" onclick="openLightbox(this)">
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <footer>
+    <div>
+      <div class="f-name">Rosie Roche</div>
+      <div class="f-date">21 June 2005 — 14 July 2025</div>
+    </div>
+    <ul class="f-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#race">The Race</a></li>
+      <li><a href="https://www.givewheel.com/fundraising/12992/raising-4-rosie/" target="_blank">Donate</a></li>
+      <li><a href="writing.html">Her Writing</a></li>
+      <li><a href="https://www.instagram.com/raising4rosie/" target="_blank">Instagram</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    function openLightbox(img) {
+      var l = document.getElementById('lightbox');
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox-img').alt = img.alt;
+      l.classList.add('active');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raising4Rosie</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      background: #FAFAF7;
+      color: #222;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(250, 250, 247, 0.97);
+      border-bottom: 1px solid #E5E0D5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 60px;
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: #2C4A35;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .logo span {
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #555;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #2C4A35;
+    }
+
+    .nav-links a.btn {
+      background: #2C4A35;
+      color: #fff;
+      padding: 0.45rem 1.1rem;
+    }
+
+    .nav-links a.btn:hover {
+      background: #3D6147;
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .hero img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.15) 60%, transparent 100%);
+    }
+
+    .hero-text {
+      position: relative;
+      z-index: 2;
+      padding: 0 2.5rem 4rem;
+      color: #fff;
+    }
+
+    .hero-text h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-text p {
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-text .tagline {
+      font-size: 1.1rem;
+      font-weight: 300;
+      letter-spacing: 0;
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      background: #C4932A;
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.7rem 1.8rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .hero-btn:hover {
+      background: #A87A20;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 5rem 2rem;
+    }
+
+    .inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .inner-sm {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 400;
+      color: #2C4A35;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    h2 em {
+      font-style: italic;
+    }
+
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: #C4932A;
+      margin-bottom: 2rem;
+    }
+
+    p.body {
+      font-size: 1.02rem;
+      line-height: 1.9;
+      color: #333;
+      margin-bottom: 1.1rem;
+      font-weight: 300;
+    }
+
+    /* ABOUT */
+    #about {
+      background: #fff;
+      border-top: 1px solid #E5E0D5;
+    }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .photo-stack {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+      position: sticky;
+      top: 80px;
+    }
+
+    .photo-stack img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      height: 180px;
+    }
+
+    .photo-stack img:first-child {
+      grid-column: span 2;
+      height: 280px;
+      object-position: center 20%;
+    }
+
+    .photo-stack img:last-child {
+      grid-column: span 2;
+      height: 220px;
+      object-position: center;
+    }
+
+    /* CHARITIES */
+    #charities {
+      background: #FAFAF7;
+      border-top: 1px solid #E5E0D5;
+    }
+
+    .charity-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .charity-card {
+      background: #fff;
+      border: 1px solid #E5E0D5;
+      padding: 2rem;
+    }
+
+    .charity-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: #2C4A35;
+      margin-bottom: 0.3rem;
+    }
+
+    .charity-card .sub {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #7FA882;
+      margin-bottom: 1.1rem;
+    }
+
+    .charity-card p {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: #444;
+      margin-bottom: 1.3rem;
+      font-weight: 300;
+    }
+
+    .charity-card a {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #C4932A;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(196, 147, 42, 0.4);
+      padding-bottom: 1px;
+    }
+
+    .donate-box {
+      margin-top: 1.5rem;
+      background: #2C4A35;
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .donate-box p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.98rem;
+      font-weight: 300;
+      max-width: 480px;
+      line-height: 1.6;
+    }
+
+    .donate-box a {
+      display: inline-block;
+      background: #C4932A;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.7rem 1.6rem;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .donate-box a:hover {
+      background: #A87A20;
+    }
+
+    /* RACE */
+    #race {
+      background: #fff;
+      border-top: 1px solid #E5E0D5;
+    }
+
+    .race-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .detail-table {
+      margin: 1.8rem 0;
+      border: 1px solid #E5E0D5;
+    }
+
+    .drow {
+      display: flex;
+      border-bottom: 1px solid #E5E0D5;
+    }
+
+    .drow:last-child {
+      border-bottom: none;
+    }
+
+    .dlabel {
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #7FA882;
+      padding: 0.85rem 1rem;
+      background: #FAFAF7;
+      width: 110px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      border-right: 1px solid #E5E0D5;
+    }
+
+    .dval {
+      padding: 0.85rem 1rem;
+      font-size: 0.98rem;
+      color: #333;
+      display: flex;
+      align-items: center;
+    }
+
+    .btn-green {
+      display: inline-block;
+      background: #2C4A35;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.7rem 1.6rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-green:hover {
+      background: #3D6147;
+    }
+
+    .race-img img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      object-position: center 15%;
+      display: block;
+    }
+
+    /* WRITING LINK */
+    .writing-cta {
+      background: #2C4A35;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .writing-cta h2 {
+      color: #E8DFCC;
+      margin-bottom: 0.8rem;
+    }
+
+    .writing-cta p {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 0.98rem;
+      font-weight: 300;
+      max-width: 480px;
+      margin: 0 auto 1.8rem;
+      line-height: 1.7;
+    }
+
+    .writing-cta a {
+      display: inline-block;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.7rem 1.8rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .writing-cta a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* CRISIS + FOOTER */
+    .crisis {
+      background: #3D6147;
+      color: #C8DCC8;
+      padding: 0.9rem 2rem;
+      text-align: center;
+      font-size: 0.82rem;
+      line-height: 1.7;
+      letter-spacing: 0.03em;
+    }
+
+    .crisis a {
+      color: #DDB84A;
+      text-decoration: none;
+    }
+
+    footer {
+      background: #1A1A16;
+      padding: 2.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .f-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: #C0B898;
+    }
+
+    .f-date {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: #555;
+      margin-top: 0.3rem;
+    }
+
+    .f-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .f-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #555;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .f-links a:hover {
+      color: #DDB84A;
+    }
+
+    @media(max-width:800px) {
+      .about-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-stack {
+        position: static;
+        flex-direction: row;
+      }
+
+      .photo-stack img:first-child,
+      .photo-stack img:last-child {
+        height: 220px;
+        flex: 1;
+      }
+
+      .charity-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .race-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">Raising<span>4Rosie</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#race">The Race</a></li>
+      <li><a href="index.html#charities">Charities</a></li>
+      <li><a href="events.html">4Rosie</a></li>
+      <li><a href="writing.html">Her Writing</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="https://www.givewheel.com/fundraising/12992/raising-4-rosie/" target="_blank" class="btn">Donate</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <img src="photos/hero.jpg" alt="Rosie Roche" fetchpriority="high">
+    <div class="hero-text">
+      <h1>Rosie Roche</h1>
+      <p>21st June 2005 &ndash; 14th July 2025</p>
+      <a href="https://www.givewheel.com/fundraising/12992/raising-4-rosie/" target="_blank" class="hero-btn">Donate</a>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="inner">
+      <div class="about-layout">
+        <div>
+          <h2>Rosie</h2>
+          <div class="divider"></div>
+          <p class="body">We were all completely devastated by the sudden loss of our 20 year old daughter Rosie in July
+            last year.</p>
+          <p class="body">Rosie was deeply loved by all who knew her and spent time with her. She was fun, funny and
+            beautiful inside and out. It is hard to make sense that she is no longer here, and she is greatly missed by
+            all her family and friends. Just four months earlier, Rosie had been diagnosed with bipolar II following a
+            sudden mental health crisis. She was in the early stages of treatment when she died by suicide.</p>
+          <p class="body">Rosie found wonder in the natural world from a very young age. She loved the sea. As she grew
+            older, she began to follow that curiosity beyond books and into travel. A bucket list in her notebook
+            revealed a dream to visit every continent. Her childhood hero was Jane Goodall. Rosie loved nothing more
+            than a challenging debate or a competitive game of cards. She loved her friends and her family. She adored
+            film, nature documentaries, photography and drawing, and hoped one day to be a writer. She had a rare gift
+            for seeing the extraordinary in the smallest things — the whole world in a grain of sand.</p>
+        </div>
+        <div class="photo-stack">
+          <img loading="lazy" decoding="async" src="photos/rosie-sea.jpg" alt="Rosie smiling by the sea">
+          <img loading="lazy" decoding="async" src="photos/rosie-boat.jpg" alt="Rosie on a boat">
+          <img loading="lazy" decoding="async" src="photos/rosie-mum.jpg" alt="Rosie with her mum">
+          <img loading="lazy" decoding="async" src="photos/rosie-travel.jpg" alt="Rosie travelling">
+          <img loading="lazy" decoding="async" src="photos/rosie-coast.jpg" alt="Rosie on a coastal walk">
+          <img loading="lazy" decoding="async" src="photos/rosie-horse.jpg" alt="Rosie with her horse">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RACE -->
+  <section id="race" style="background:#fff; border-top:1px solid #E5E0D5;">
+    <div class="inner">
+      <div class="race-layout">
+        <div>
+          <h2>The <em>Race</em></h2>
+          <div class="divider"></div>
+          <p class="body">In Rosie's memory, Hugh, Pippa, their family and friends are taking on a two-day 100-kilometre
+            trek along England's ancient Ridgeway path, finishing beneath the standing stones of Avebury on the
+            11th-12th of July 2026.</p>
+          <p class="body">We hope that through raising funds for these two charities, Suicide &amp; Co and the Whitley
+            Fund for Nature, some amazing work can be achieved in her name and that her spirit can somehow live on...
+          </p>
+
+          <a href="https://www.givewheel.com/fundraising/12992/raising-4-rosie/" target="_blank"
+            class="btn-green">Sponsor a team →</a>
+        </div>
+        <div class="race-img">
+          <img loading="lazy" decoding="async" src="photos/rosie-mountain.jpg" alt="Rosie on a mountain peak">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOLLOW ALONG -->
+  <section id="follow" style="background:#FAFAF7; border-top:1px solid #E5E0D5;">
+    <div class="inner">
+      <div class="race-layout">
+        <div>
+          <h2>Follow <em>Along</em></h2>
+          <div class="divider"></div>
+          <p class="body">Follow our journey — training updates, event news and fundraising milestones — on our
+            Instagram page.</p>
+
+          <a href="https://www.instagram.com/raising4rosie/" target="_blank" class="btn-green">Follow on Instagram
+            →</a>
+        </div>
+        <div class="race-img">
+          <img loading="lazy" decoding="async" src="photos/rosie-kayak.jpg" alt="Rosie kayaking">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section id="events" style="background:#fff; border-top:1px solid #E5E0D5;">
+    <div class="inner">
+      <div class="race-layout">
+        <div>
+          <h2><a href="events.html" style="color:inherit; text-decoration:none;">4<em>Rosie</em></a></h2>
+          <div class="divider"></div>
+          <p class="body">A number of Rosie's friends have very kindly taken on challenges and raced in Rosie's name and
+            raised money for charities. Our deepest thanks and heartfelt congratulations on completing these challenges.
+            A lot of sweat and tears.</p>
+
+          <a href="events.html" class="btn-green">View 4Rosie →</a>
+        </div>
+        <div class="race-img">
+          <img loading="lazy" decoding="async" src="photos/rosie-horsehug.jpg" alt="Rosie with her horse">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHARITIES -->
+  <section id="charities" style="background:#FAFAF7; border-top:1px solid #E5E0D5;">
+    <div class="inner">
+      <h2>The <em>Charities</em></h2>
+      <div class="divider"></div>
+      <p class="body" style="max-width:600px;">All money raised goes to two fantastic organisations — one supporting
+        people bereaved by suicide, and another supporting nature conservation leaders.</p>
+
+      <div class="charity-cards">
+        <div class="charity-card">
+          <h3>Suicide &amp; Co</h3>
+          <div class="sub">Bereavement support</div>
+          <p>Supporting people bereaved by suicide with one-to-one counselling, peer support, and a community of people
+            who understand this particular kind of grief.</p>
+          <a href="https://www.suicideandco.org" target="_blank">suicideandco.org →</a>
+        </div>
+        <div class="charity-card">
+          <h3>The Whitley Award</h3>
+          <div class="sub">Nature Conservation</div>
+          <p>Supporting inspiring conservation leaders across the Global South. A cause that Rosie was deeply passionate
+            about during her time abroad.</p>
+          <a href="https://whitleyaward.org" target="_blank">whitleyaward.org →</a>
+        </div>
+      </div>
+
+      <div class="donate-box">
+        <p>Every donation goes directly to Suicide & Co and The Whitley Award, in Rosie's name.</p>
+        <a href="https://www.givewheel.com/fundraising/12992/raising-4-rosie/" target="_blank">Donate now →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WRITING LINK -->
+  <div class="writing-cta">
+    <div class="inner-sm">
+      <h2>Her <em>Writing</em></h2>
+
+      <a href="writing.html">Read her writing →</a>
+    </div>
+  </div>
+
+  <!-- CRISIS -->
+
+
+  <footer>
+    <div>
+      <div class="f-name">Rosie Roche</div>
+      <div class="f-date">21 June 2005 — 14 July 2025</div>
+    </div>
+    <ul class="f-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#race">The Race</a></li>
+      <li><a href="https://www.givewheel.com/fundraising/12992/raising-4-rosie/" target="_blank">Donate</a></li>
+      <li><a href="writing.html">Her Writing</a></li>
+      <li><a href="https://www.instagram.com/raising4rosie/" target="_blank">Instagram</a></li>
+    </ul>
+  </footer>
+
+</body>
+
+</html>

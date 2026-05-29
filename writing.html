@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Her Writing — Raising4Rosie</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      background: #FAFAF7;
+      color: #222;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(250, 250, 247, 0.97);
+      border-bottom: 1px solid #E5E0D5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 60px;
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: #2C4A35;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .logo span {
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    .back {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #555;
+      text-decoration: none;
+    }
+
+    .back:hover {
+      color: #2C4A35;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #555;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #2C4A35;
+    }
+
+    .nav-links a.btn {
+      background: #2C4A35;
+      color: #fff;
+      padding: 0.45rem 1.1rem;
+    }
+
+    .nav-links a.btn:hover {
+      background: #3D6147;
+    }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 120px 2rem 4rem;
+      background: #fff;
+      border-bottom: 1px solid #E5E0D5;
+    }
+
+    .page-header-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .page-header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 400;
+      font-style: italic;
+      color: #2C4A35;
+      margin-bottom: 0.6rem;
+    }
+
+    .page-header p {
+      font-size: 1rem;
+      color: #666;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* PIECES */
+    .pieces {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 3rem 2rem 6rem;
+    }
+
+    .piece {
+      margin-bottom: 4rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid #E5E0D5;
+      overflow: hidden;
+    }
+
+    .piece:last-child {
+      border-bottom: none;
+    }
+
+    .piece-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #7FA882;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .piece h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 400;
+      color: #2C4A35;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    /* prose */
+    .prose p {
+      font-size: 1.05rem;
+      line-height: 1.95;
+      color: #333;
+      margin-bottom: 1.2rem;
+      font-weight: 300;
+    }
+
+    .prose p em {
+      font-style: italic;
+    }
+
+    /* poetry */
+    .poem {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      line-height: 2;
+      color: #333;
+    }
+
+    .poem .stanza {
+      margin-bottom: 1.5rem;
+    }
+
+    /* artwork */
+    .writing-art {
+      max-width: 42%;
+      margin-bottom: 1rem;
+    }
+
+    .writing-art.right {
+      float: right;
+      margin-left: 2.6rem;
+    }
+
+    .writing-art.left {
+      float: left;
+      margin-right: 2.6rem;
+    }
+
+    .writing-art img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* a full artwork that keeps its own background gets a soft mount */
+    .writing-art.framed img {
+      background: #fff;
+      padding: 0.8rem;
+      border: 1px solid #E5E0D5;
+      box-shadow: 0 6px 26px rgba(0, 0, 0, 0.09);
+    }
+
+    /* side-by-side layout: poem on one side, drawing on the other */
+    .piece.split {
+      display: flex;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .piece.split.flip {
+      flex-direction: row-reverse;
+    }
+
+    .piece.split .piece-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .piece.split .writing-art {
+      float: none;
+      margin: 0;
+      width: 48%;
+      max-width: 48%;
+      flex-shrink: 0;
+    }
+
+    /* a drawing that should sit larger than the others */
+    .piece.split .writing-art.large {
+      width: 58%;
+      max-width: 58%;
+    }
+
+    /* CRISIS + FOOTER */
+    .crisis {
+      background: #3D6147;
+      color: #C8DCC8;
+      padding: 0.9rem 2rem;
+      text-align: center;
+      font-size: 0.82rem;
+      line-height: 1.7;
+      letter-spacing: 0.03em;
+    }
+
+    .crisis a {
+      color: #DDB84A;
+      text-decoration: none;
+    }
+
+    footer {
+      background: #1A1A16;
+      padding: 2.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .f-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: #C0B898;
+    }
+
+    .f-date {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: #555;
+      margin-top: 0.3rem;
+    }
+
+    .f-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .f-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #555;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .f-links a:hover {
+      color: #DDB84A;
+    }
+
+  @media(max-width:800px) {
+    .nav-links { display:none; }
+
+    .writing-art.left,
+    .writing-art.right {
+      float: none;
+      max-width: 75%;
+      margin: 0 auto 1.8rem;
+    }
+
+    .piece.split,
+    .piece.split.flip {
+      flex-direction: column;
+    }
+
+    .piece.split .writing-art {
+      width: 75%;
+      max-width: 75%;
+      margin: 0 auto 1.8rem;
+      order: -1;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+  <nav>
+    <a href="index.html" class="logo">Raising<span>4Rosie</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#race">The Race</a></li>
+      <li><a href="index.html#charities">Charities</a></li>
+      <li><a href="events.html">4Rosie</a></li>
+      <li><a href="writing.html">Her Writing</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="https://www.givewheel.com/fundraising/12992/raising-4-rosie/" target="_blank" class="btn">Donate</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <div class="page-header-inner">
+      <h1>Her Writing</h1>
+      <p>Words by Rosie Roche — poet, observer, dreamer.</p>
+      <p style="margin-top:1rem;">Rosie loved to draw and write. She was never happier than with a pad and a pencil.</p>
+    </div>
+  </div>
+
+  <div class="pieces">
+
+
+    <!-- BUTTERFLY -->
+    <div class="piece split">
+      <div class="piece-text">
+        <span class="piece-tag">Poem</span>
+        <h2>Butterfly</h2>
+      <div class="poem">
+        <div class="stanza">
+          The sun filters through my wings<br>
+          Lighting them up in a dazzling pattern of deepest red<br>
+          And palest yellows.<br>
+          They open and close<br>
+          Like eyes slowly blinking<br>
+          In bright light.
+        </div>
+        <div class="stanza">
+          I stretch<br>
+          And lift<br>
+          Wings flitting around me furiously<br>
+          Pushing me in random jerking movements<br>
+          Towards glowing golden nectar waiting in its nest of petals.
+        </div>
+        <div class="stanza">
+          I land<br>
+          My long tongue unfurls like a scroll<br>
+          And dips into the shimmering feast.<br>
+          The honey-like liquid is smooth and creamy<br>
+          It fills my mouth and seeps throughout my body<br>
+          Filling me with liquid light.
+        </div>
+        <div class="stanza">
+          I watch dreamily<br>
+          As another butterfly flutters towards me<br>
+          I join him in the blue, blue sky<br>
+          And we dance<br>
+          Swooping past one another<br>
+          Chasing<br>
+          Twirling<br>
+          Spinning<br>
+          Through the air<br>
+          Tumbling through the sky<br>
+          A beautiful butterfly
+        </div>
+      </div>
+      </div>
+      <div class="writing-art large">
+        <img src="art/Butterfly.png" alt="Butterfly drawing by Rosie">
+      </div>
+    </div>
+
+    <!-- SUNSET -->
+    <div class="piece split flip">
+      <div class="piece-text">
+        <span class="piece-tag">Poem</span>
+        <h2>Sunset</h2>
+      <div class="poem">
+        <div class="stanza">
+          The last dance of a dying sun is a beautiful thing.<br>
+          Its bright flank lowers carefully onto the horizon,<br>
+          Dipping lower, nestling among the trees.<br>
+          Its light pools atop the curling mist,<br>
+          The clouds blush hot pink and marigold.
+        </div>
+        <div class="stanza">
+          The grass blanketed across the field<br>
+          Is scattered with a thousand dew drops,<br>
+          Each with a single tiny sun captured in its heart.<br>
+          The evening breeze brushes over them,<br>
+          Twining up a tree to flick gently against the leaves.
+        </div>
+        <div class="stanza">
+          A faint rustling churns quietly as the sun departs.<br>
+          The wilderness is stirred momentarily to a solemn quiet.<br>
+          The blackbird halts her fluting tune,<br>
+          The cattle's broad head rises from his grazing,<br>
+          The tulip folds, vibrant petals closing tight,
+        </div>
+        <div class="stanza">
+          As the candle fleck that was a blazing mosaic<br>
+          Is snuffed out by the dawning night.
+        </div>
+      </div>
+      </div>
+      <div class="writing-art">
+        <img src="art/Rose.png" alt="Rose drawing by Rosie">
+      </div>
+    </div>
+
+    <!-- THE WORDSMITH -->
+    <div class="piece split">
+      <div class="piece-text">
+        <span class="piece-tag">Poem · January 2020</span>
+        <h2>The Wordsmith</h2>
+      <div class="poem">
+        <div class="stanza">
+          Keyboards clack, irregular and untimely<br>
+          As the Wordsmiths thoughts ebb and flow<br>
+          Like a wave, they rise in a ripple<br>
+          Growing in size as they near the shore<br>
+          And crash in a shower of words and emotion<br>
+          Just a spray from Literatures ocean
+        </div>
+        <div class="stanza">
+          The Wordsmith gathers the droplets of sound<br>
+          Into a basket slung over his arm<br>
+          He cradles it close as he carries it up<br>
+          Into his house on the cliffs of Vamhurp
+        </div>
+        <div class="stanza">
+          This place he goes is a place of dreams<br>
+          A world far apart from all reality<br>
+          Here he pours the water of reflection<br>
+          Into a forge with greatest affection
+        </div>
+        <div class="stanza">
+          A swift crystal breeze is sent across<br>
+          Freezing the water into a smooth heavy block<br>
+          The slab is hauled onto table of stone<br>
+          He will sculpt and carve and hone
+        </div>
+        <div class="stanza">
+          At the finishing point when all is done<br>
+          Is left a once sharp chisel blunt<br>
+          And in the ice a story whirls<br>
+          Of sparkling diamonds and shimmering pearls
+        </div>
+      </div>
+      </div>
+      <div class="writing-art framed">
+        <img src="art/owl.jpg" alt="Owl charcoal drawing by Rosie">
+      </div>
+    </div>
+
+    <!-- WAKE UP -->
+    <div class="piece split flip">
+      <div class="piece-text">
+        <span class="piece-tag">Poem · January 2020</span>
+        <h2>Wake Up</h2>
+      <div class="poem">
+        <div class="stanza">
+          Dreams are bulldozed into dust<br>
+          Swept away by powerful gust<br>
+          Eyes shoot open, swirling round<br>
+          Rolling for the piercing sound
+        </div>
+        <div class="stanza">
+          Legs kick duvet off the bed<br>
+          Crumpling the neat bedspread<br>
+          Face distorts into a yawn<br>
+          Scrunched up in the light of dawn
+        </div>
+        <div class="stanza">
+          Regretfully the night is done<br>
+          Faded by the waking sun<br>
+          Alarm is slapped quite dutifully<br>
+          With a tired and sleepy plea
+        </div>
+        <div class="stanza">
+          Rolling out on to the floor<br>
+          An arm gets bruised against the door<br>
+          Wake up sings chorus morn<br>
+          Another day has just been born
+        </div>
+      </div>
+      </div>
+      <div class="writing-art">
+        <img src="art/Cockerel.png" alt="Cockerel drawing by Rosie">
+      </div>
+    </div>
+
+    <!-- GIFFORDS CIRCUS -->
+    <div class="piece">
+      <div class="writing-art right">
+        <img src="art/Blackberries_Left.png" alt="Blackberries drawing by Rosie">
+      </div>
+      <span class="piece-tag">Prose</span>
+      <h2>Giffords Circus</h2>
+      <div class="prose">
+        <p>There is something so deeply dazzling about the circus as to leave you with a lingering feeling of amazement
+          and inspiration which is unparalleled by any other kind of performance.</p>
+        <p>Such a confusion and kaleidoscope of wonders and colour and impossibility.</p>
+        <p>It was utterly breathtaking and I loved every moment.</p>
+        <p>To be an utterly invisible gasping laughing silent in awe part of a crowd all held in the artful balance of
+          suspense and delight.</p>
+        <p>The theatricality of it all was amazing.</p>
+      </div>
+    </div>
+
+    <!-- FLYING HOME -->
+    <div class="piece">
+      <div class="writing-art left">
+        <img src="art/Blackberries_Right.png" alt="Blackberries drawing by Rosie">
+      </div>
+      <span class="piece-tag">Prose · Flying home from her year off</span>
+      <h2>Flying Home</h2>
+      <div class="prose">
+        <p>What would Byron and Wordsworth write if they knew we would one day commute through the intangible mountains
+          of white cloud, in a branded cylinder hurtling through the air, somehow more stable and smooth than rolling on
+          rails in a train.</p>
+        <p>Sinking into the glow.</p>
+        <p>So vivid so glorious so heavenly.</p>
+        <p>It would give way to shadow and rain and muddy green and grey.</p>
+        <p>England. Home.</p>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <footer>
+    <div>
+      <div class="f-name">Rosie Roche</div>
+      <div class="f-date">21 June 2005 — 14 July 2025</div>
+    </div>
+    <ul class="f-links">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#race">The Race</a></li>
+      <li><a href="https://www.givewheel.com/fundraising/12992/raising-4-rosie/" target="_blank">Donate</a></li>
+      <li><a href="writing.html">Her Writing</a></li>
+      <li><a href="https://www.instagram.com/raising4rosie/" target="_blank">Instagram</a></li>
+    </ul>
+  </footer>
+
+</body>
+
+</html>
